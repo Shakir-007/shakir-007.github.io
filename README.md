@@ -1,5 +1,7 @@
 # AWS DevOps Portfolio — Mohd Shakir
 
+**🔗 Live Demo:** [shakir-007githubio.vercel.app](https://shakir-007githubio.vercel.app/)
+
 Personal portfolio site built with React, TypeScript, Vite, and Tailwind CSS.
 
 ## Prerequisites
@@ -19,8 +21,7 @@ No environment variables, API keys, or external services are required — the si
 Clone the repo and install dependencies:
 
 ```bash
-git clone https://github.com/shakir-007/aws-devops-portfolio.git
-cd aws-devops-portfolio
+git clone https://github.com/Shakir-007/shakir-007.github.io
 npm install
 ```
 
@@ -68,3 +69,5 @@ public/
 ## Deploying
 
 The `dist/` folder from `npm run build` is a static site — deploy it to any static host (Vercel, Netlify, GitHub Pages, S3 + CloudFront, etc.). No server-side runtime is needed.
+
+**Live version:** https://shakir-007githubio.vercel.app/
