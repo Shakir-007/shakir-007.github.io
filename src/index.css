@@ -61,6 +61,89 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+/* Sequential left-to-right "content lights up" chase for the architecture flow diagrams.
+   All nodes share the same duration; animation-delay staggers when each one lights up.
+   After the last node's pulse, the shared cycle just idles (normal state) until it loops. */
+@keyframes node-light {
+  0%,
+  100% {
+    border-color: #d1d5db;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 0 rgba(244, 63, 94, 0);
+    transform: scale(1);
+  }
+  8% {
+    border-color: #f43f5e;
+    background-color: #fff1f2;
+    box-shadow:
+      0 0 0 4px rgba(244, 63, 94, 0.3),
+      0 6px 16px rgba(244, 63, 94, 0.25);
+    transform: scale(1.05);
+  }
+  16% {
+    border-color: #d1d5db;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 0 rgba(244, 63, 94, 0);
+    transform: scale(1);
+  }
+}
+
+@keyframes node-light-amber {
+  0%,
+  100% {
+    border-color: #fcd34d;
+    background-color: #fffbeb;
+    box-shadow: 0 0 0 0 rgba(244, 63, 94, 0);
+    transform: scale(1);
+  }
+  8% {
+    border-color: #f43f5e;
+    background-color: #fff1f2;
+    box-shadow:
+      0 0 0 4px rgba(244, 63, 94, 0.3),
+      0 6px 16px rgba(244, 63, 94, 0.25);
+    transform: scale(1.05);
+  }
+  16% {
+    border-color: #fcd34d;
+    background-color: #fffbeb;
+    box-shadow: 0 0 0 0 rgba(244, 63, 94, 0);
+    transform: scale(1);
+  }
+}
+
+/* Color-agnostic glow pulse for the network topology diagram — only touches box-shadow/scale,
+   so it composes safely on top of any node's own background/border tint. */
+@keyframes node-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(244, 63, 94, 0);
+    transform: scale(1);
+  }
+  8% {
+    box-shadow:
+      0 0 0 4px rgba(244, 63, 94, 0.35),
+      0 6px 16px rgba(244, 63, 94, 0.25);
+    transform: scale(1.08);
+  }
+  16% {
+    box-shadow: 0 0 0 0 rgba(244, 63, 94, 0);
+    transform: scale(1);
+  }
+}
+
+/* One-time entrance for the hero name on load; its color cycling is handled in JS (see AnimatedName). */
+@keyframes name-intro {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -72,6 +155,7 @@
 
   html {
     font-size: var(--font-size);
+    scroll-behavior: smooth;
   }
 
   h1 {

@@ -2,32 +2,31 @@ import { Card, CardContent } from '../components/ui/card';
 
 export function AboutSection() {
   return (
-    <section id="about" className="py-20 px-6 bg-white">
+    <section id="about" className="scroll-mt-20 py-16 px-6 bg-white">
       <div className="max-w-5xl mx-auto">
         <h2 className="text-4xl mb-12 text-center">About Me</h2>
 
         <Card className="rounded-2xl border-2">
-          <CardContent className="p-8">
+          <CardContent className="p-6 sm:p-8">
             <div className="prose prose-lg max-w-none">
               <p className="text-gray-700 leading-relaxed mb-6">
-                I'm a DevOps Engineer with strong fundamentals in cloud infrastructure, automation,
-                and continuous delivery. My approach centers on project-based learning and hands-on
-                implementation, building practical solutions that solve real-world problems.
+                DevOps Engineer with 4+ years of experience designing, automating, and operating cloud infrastructure and
+                CI/CD pipelines across AWS and Azure. Specialized in Infrastructure as Code (IaC), container orchestration,
+                site reliability engineering (SRE), and end-to-end release automation for production-grade, high-availability
+                systems.
               </p>
 
               <p className="text-gray-700 leading-relaxed mb-6">
-                Through focused practice and experimentation, I've developed expertise in Linux system
-                administration, AWS cloud services, containerization with Docker and Kubernetes,
-                infrastructure as code using Terraform, and building robust CI/CD pipelines with Jenkins.
-                I believe in learning by doing — every project is an opportunity to deepen understanding
-                and refine best practices.
+                Microsoft Certified Azure Administrator (AZ-104) with a proven record of accelerating deployments,
+                strengthening pipeline security, improving observability, and reducing infrastructure cost. My toolkit
+                centers on Terraform, Docker, Amazon ECS Fargate, GitHub Actions, and monitoring with CloudWatch,
+                Prometheus, and Grafana — with hands-on experience across AWS and Azure networking, security, and
+                compute services.
               </p>
 
               <p className="text-gray-700 leading-relaxed">
-                My toolkit includes Linux, AWS (EC2, VPC, S3, RDS, Lambda, and more), Docker, Kubernetes,
-                Terraform, Git, Jenkins, and monitoring solutions like Datadog. I'm passionate about
-                automation, scalability, and creating infrastructure that empowers development teams to
-                ship faster and more reliably.
+                Known for owning systems end-to-end, mentoring teammates, and collaborating across engineering,
+                frontend, and backend teams to deliver reliable software at scale.
               </p>
             </div>
           </CardContent>

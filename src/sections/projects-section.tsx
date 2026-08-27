@@ -1,104 +1,93 @@
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
-import { GithubIcon } from '../components/icons';
+
+const companyLogos: Record<string, string> = {
+  'Rayna Group': '/rayna-tours.png',
+  HCLTech: '/hcltech.png',
+};
+
+const companyUrls: Record<string, string> = {
+  'Rayna Group': 'https://www.raynatours.com/',
+  HCLTech: 'https://www.hcltech.com/',
+};
 
 const projects = [
   {
-    title: 'Linux System Automation',
+    title: 'Automated CI/CD Delivery Platform on AWS',
+    company: 'Rayna Group',
     problem:
-      'Manual system administration tasks were time-consuming and error-prone, requiring automated solutions for user management, backups, and monitoring.',
+      'Multiple services needed a standardized, secure release process to eliminate manual deployment errors and hardcoded credentials.',
     architecture:
-      'Developed Bash scripts with cron jobs for scheduled tasks, log rotation, and system health monitoring. Implemented automated backup solutions and user provisioning workflows.',
-    tools: ['Linux', 'Bash', 'Cron', 'Shell Scripting', 'Log Management'],
-    outcome:
-      'Reduced manual intervention by 80%, automated daily backups, and created reusable scripts for system administration tasks.',
-    github: '#',
+      'Designed a fully automated GitHub Actions pipeline — build, test, Dockerization, ECR image management, and rolling ECS Fargate releases — standardizing deployments across multiple services. Implemented OIDC-based authentication and SSM-managed secrets, eliminating all hardcoded credentials and hardening the delivery workflow.',
+    tools: ['GitHub Actions', 'Docker', 'Amazon ECR', 'ECS Fargate', 'OIDC', 'SSM Parameter Store'],
+    outcome: '40% faster release cycles and a repeatable, low-error deployment process across all environments.',
   },
   {
-    title: 'Multi-Tier AWS Application Deployment',
+    title: 'Terraform-Driven Infrastructure & Observability',
+    company: 'Rayna Group',
     problem:
-      'Need to deploy a scalable three-tier web application with proper network segmentation, security, and high availability.',
+      'Manual, inconsistent AWS provisioning across dev, staging, and production slowed delivery and increased configuration drift risk.',
     architecture:
-      'Designed VPC with public and private subnets across multiple AZs. Deployed web servers in public subnets, application servers in private subnets, and RDS database with Multi-AZ failover. Configured ALB, Auto Scaling, and CloudWatch monitoring.',
-    tools: ['AWS EC2', 'VPC', 'RDS', 'ELB', 'Auto Scaling', 'CloudWatch', 'IAM', 'Route 53'],
+      'Codified the full AWS footprint (EC2, ECS Fargate, ALB, RDS, S3, VPC, Auto Scaling) as reusable Terraform modules with remote state for consistent multi-environment provisioning. Built CloudWatch dashboards, SNS alerting, and traffic/CPU-based auto-scaling policies.',
+    tools: ['Terraform', 'VPC', 'ECS Fargate', 'ALB', 'RDS', 'CloudWatch', 'SNS'],
     outcome:
-      'Successfully deployed highly available application with 99.9% uptime, automatic scaling based on demand, and comprehensive monitoring.',
-    github: '#',
+      'Sustained 3x traffic spikes with zero manual intervention, a 35% reduction in MTTD, and improved cost efficiency through right-sized infrastructure.',
   },
   {
-    title: 'Static Website with S3 & CloudFront',
-    problem: 'Host a high-performance static website with global CDN distribution and HTTPS support.',
+    title: 'Multi-Cloud Operations',
+    company: 'HCLTech',
+    problem: 'Enterprise clients needed reliable AWS and Azure operations with strict SLA-bound incident response.',
     architecture:
-      'Configured S3 bucket for static website hosting with proper bucket policies. Set up CloudFront distribution for global content delivery, SSL certificate via ACM, and Route 53 for DNS management.',
-    tools: ['AWS S3', 'CloudFront', 'Route 53', 'ACM', 'IAM'],
-    outcome: 'Achieved sub-second load times globally, reduced hosting costs by 60%, and implemented secure HTTPS delivery.',
-    github: '#',
-  },
-  {
-    title: 'Dockerized Application',
-    problem: 'Application had inconsistent behavior across development and production environments due to dependency mismatches.',
-    architecture:
-      'Created multi-stage Dockerfiles for optimized image sizes. Implemented Docker Compose for local development with multiple services (web, database, cache). Set up Docker networking and volume management for data persistence.',
-    tools: ['Docker', 'Docker Compose', 'Multi-stage Builds', 'Docker Hub'],
+      'Operated AWS and Azure environments end-to-end, automating Azure VM provisioning via ARM templates and Azure CLI, and managing VNet, NSG, VPN Gateway, and Load Balancer networking across regions for 10+ client environments.',
+    tools: ['AWS', 'Azure', 'ARM Templates', 'Azure CLI', 'VNet', 'NSG', 'VPN Gateway'],
     outcome:
-      "Eliminated 'works on my machine' issues, reduced deployment time by 70%, and decreased image size by 60% using multi-stage builds.",
-    github: '#',
-  },
-  {
-    title: 'Kubernetes & EKS Deployment',
-    problem: 'Need to orchestrate containerized applications with automatic scaling, self-healing, and zero-downtime deployments.',
-    architecture:
-      'Deployed applications on AWS EKS cluster with properly configured worker nodes. Implemented Kubernetes deployments, services, ingress controllers, ConfigMaps, and Secrets. Set up Horizontal Pod Autoscaling and rolling updates.',
-    tools: ['Kubernetes', 'AWS EKS', 'kubectl', 'Helm', 'Ingress Controller', 'HPA'],
-    outcome:
-      'Achieved zero-downtime deployments, automatic pod scaling based on CPU/memory metrics, and improved resource utilization by 40%.',
-    github: '#',
-  },
-  {
-    title: 'Terraform Infrastructure Automation',
-    problem: 'Manual infrastructure provisioning was slow, inconsistent, and difficult to replicate across environments.',
-    architecture:
-      'Developed Terraform modules for reusable infrastructure components. Implemented remote state management with S3 and DynamoDB locking. Created separate workspaces for dev, staging, and production environments with environment-specific variables.',
-    tools: ['Terraform', 'AWS', 'Terraform Modules', 'Remote State', 'Workspaces', 'Variables'],
-    outcome:
-      'Reduced infrastructure provisioning time from hours to minutes, ensured consistency across environments, and enabled infrastructure version control.',
-    github: '#',
-  },
-  {
-    title: 'Jenkins CI/CD Pipeline',
-    problem: 'Manual build, test, and deployment processes caused delays and increased the risk of human error.',
-    architecture:
-      'Built Jenkins pipelines with stages for code checkout, build (Maven), code quality analysis (SonarQube), Docker image creation, and deployment. Implemented blue-green, canary, and rolling deployment strategies for different applications.',
-    tools: ['Jenkins', 'Maven', 'SonarQube', 'Docker', 'Git', 'Deployment Strategies'],
-    outcome: 'Automated entire software delivery pipeline, reduced deployment time from 2 hours to 15 minutes, and caught code quality issues early.',
-    github: '#',
-  },
-  {
-    title: 'Monitoring & Alerting with Datadog',
-    problem: 'Lack of visibility into application performance and infrastructure health led to reactive problem-solving.',
-    architecture:
-      'Integrated Datadog agents across infrastructure for metric collection. Created custom dashboards for application performance, infrastructure health, and business KPIs. Set up intelligent alerts with proper thresholds and notification channels.',
-    tools: ['Datadog', 'Custom Metrics', 'APM', 'Dashboards', 'Alerts', 'Log Management'],
-    outcome: 'Reduced MTTR by 60%, proactive issue detection before user impact, and comprehensive visibility across the entire stack.',
-    github: '#',
+      'Reduced onboarding time from 2 days to under 2 hours, resolved P1/P2 incidents in under 45 minutes on average, and maintained 99.9%+ production uptime.',
   },
 ];
 
 export function ProjectsSection() {
   return (
-    <section id="projects" className="py-20 px-6 bg-white">
+    <section id="projects" className="scroll-mt-20 py-16 px-6 bg-white">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl mb-4 text-center">Projects</h2>
+        <h2 className="text-4xl mb-4 text-center">Key Projects</h2>
         <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-          Hands-on projects demonstrating DevOps practices, cloud infrastructure, and automation
+          Production infrastructure and delivery platforms built across AWS and Azure
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {projects.map((project) => (
-            <Card key={project.title} className="rounded-2xl border-2 hover:shadow-xl transition-all">
+            <Card
+              key={project.title}
+              className="rounded-2xl border-2 hover:shadow-xl hover:-translate-y-1 hover:border-rose-200 transition-all"
+            >
               <CardHeader>
-                <CardTitle className="text-xl">{project.title}</CardTitle>
+                <div className="flex items-start justify-between gap-3">
+                  <CardTitle className="text-xl">{project.title}</CardTitle>
+                  {companyUrls[project.company] ? (
+                    <a
+                      href={companyUrls[project.company]}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-2 py-1 shrink-0 transition-all hover:shadow-sm hover:border-rose-300 hover:scale-105"
+                    >
+                      <img
+                        src={companyLogos[project.company]}
+                        alt={`${project.company} logo`}
+                        className="h-4 w-auto object-contain"
+                      />
+                      <span className="text-xs text-gray-600 whitespace-nowrap">{project.company}</span>
+                    </a>
+                  ) : (
+                    <div className="flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-2 py-1 shrink-0">
+                      <img
+                        src={companyLogos[project.company]}
+                        alt={`${project.company} logo`}
+                        className="h-4 w-auto object-contain"
+                      />
+                      <span className="text-xs text-gray-600 whitespace-nowrap">{project.company}</span>
+                    </div>
+                  )}
+                </div>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
@@ -125,15 +114,6 @@ export function ProjectsSection() {
                 <div>
                   <h4 className="text-sm uppercase tracking-wide text-gray-500 mb-2">Outcome</h4>
                   <p className="text-gray-700">{project.outcome}</p>
-                </div>
-
-                <div className="pt-4">
-                  <Button variant="outline" className="rounded-xl" asChild>
-                    <a href={project.github} target="_blank" rel="noopener noreferrer">
-                      <GithubIcon className="mr-2 h-4 w-4" />
-                      View on GitHub
-                    </a>
-                  </Button>
                 </div>
               </CardContent>
             </Card>

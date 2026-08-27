@@ -1,32 +1,70 @@
-# React + TypeScript + Vite
+# AWS DevOps Portfolio — Mohd Shakir
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Personal portfolio site built with React, TypeScript, Vite, and Tailwind CSS.
 
-Currently, two official plugins are available:
+## Prerequisites
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Node.js 20+** (developed on Node v24) and **npm 10+** — check with:
+  ```bash
+  node -v
+  npm -v
+  ```
+  If you need to install/upgrade Node, get it from [nodejs.org](https://nodejs.org/) or use a version manager like `nvm`.
+- **Git**
 
-## React Compiler
+No environment variables, API keys, or external services are required — the site is fully static.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Setup
 
-## Expanding the Oxlint configuration
+Clone the repo and install dependencies:
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+git clone https://github.com/shakir-007/aws-devops-portfolio.git
+cd aws-devops-portfolio
+npm install
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Run locally
+
+Start the dev server (hot reload, runs on http://localhost:5173 by default — Vite auto-picks the next free port if that one's busy):
+
+```bash
+npm run dev
+```
+
+## Build for production
+
+```bash
+npm run build
+```
+
+Compiles TypeScript and outputs an optimized static build to `dist/`.
+
+Preview the production build locally:
+
+```bash
+npm run preview
+```
+
+## Lint
+
+```bash
+npm run lint
+```
+
+## Project structure
+
+```
+src/
+  components/     # shared UI primitives (button, card, badge, tabs, navbar, icons)
+  hooks/          # scroll-progress and active-section hooks used by the navbar
+  sections/       # one file per page section (hero, about, experience, projects, ...)
+  App.tsx         # assembles all sections in order
+public/
+  icons/          # tech-stack logos used in the Skills section
+  Mohd_Shakir.pdf # resume served by the Download Resume buttons
+```
+
+## Deploying
+
+The `dist/` folder from `npm run build` is a static site — deploy it to any static host (Vercel, Netlify, GitHub Pages, S3 + CloudFront, etc.). No server-side runtime is needed.

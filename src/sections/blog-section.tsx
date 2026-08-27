@@ -5,50 +5,75 @@ import { Badge } from '../components/ui/badge';
 
 const blogPosts = [
   {
-    title: 'Essential Linux Commands Every DevOps Engineer Should Know',
+    title: 'terraform-service-task',
     description:
-      'A comprehensive guide to the most useful Linux commands for daily DevOps tasks, including file management, process monitoring, and system administration.',
-    category: 'Linux',
-    tags: ['Linux', 'Shell', 'Best Practices'],
+      'Reusable Terraform module for provisioning an ECS service and task definition, ready to plug into a Fargate cluster.',
+    category: 'Terraform',
+    tags: ['Terraform', 'ECS', 'IaC'],
+    href: 'https://github.com/TechnoHeavenTechnology/terraform-service-task',
   },
   {
-    title: 'Debugging Kubernetes Pod Failures: A Step-by-Step Guide',
+    title: 'terraform-multi-container-service',
     description:
-      'Common Kubernetes pod issues and how to troubleshoot them using kubectl commands, logs analysis, and debugging techniques.',
-    category: 'Kubernetes',
-    tags: ['Kubernetes', 'Troubleshooting', 'DevOps'],
+      'Terraform module for a multi-container ECS service definition — sidecar containers, shared networking, and task-level configuration.',
+    category: 'Terraform',
+    tags: ['Terraform', 'ECS Fargate', 'IaC'],
+    href: 'https://github.com/TechnoHeavenTechnology/terraform-multi-container-service',
   },
   {
-    title: 'AWS VPC Best Practices for Multi-Tier Applications',
-    description:
-      'Design patterns and security best practices for creating VPCs with proper subnet segmentation, routing, and security groups.',
-    category: 'AWS',
-    tags: ['AWS', 'VPC', 'Networking', 'Security'],
+    title: 'terraform-external-alb',
+    description: 'Terraform module for provisioning an internet-facing Application Load Balancer with listeners and target groups.',
+    category: 'Terraform',
+    tags: ['Terraform', 'ALB', 'Networking'],
+    href: 'https://github.com/TechnoHeavenTechnology/terraform-external-alb',
   },
   {
-    title: 'Optimizing Docker Images: From 1GB to 100MB',
-    description: 'Practical techniques for reducing Docker image sizes using multi-stage builds, Alpine base images, and layer optimization.',
-    category: 'Docker',
-    tags: ['Docker', 'Optimization', 'Best Practices'],
+    title: 'Eliminating Long-Lived AWS Keys: OIDC Federation with GitHub Actions',
+    description:
+      'How to replace static AWS access keys in CI/CD with short-lived credentials using OIDC federation between GitHub Actions and IAM roles.',
+    category: 'CI/CD',
+    tags: ['GitHub Actions', 'OIDC', 'IAM'],
   },
   {
-    title: 'Terraform State Management: Remote Backends and Locking',
+    title: 'Terraform Remote State & Modules for Multi-Environment AWS',
     description:
-      'Understanding Terraform state files, implementing remote backends with S3, and preventing state corruption with DynamoDB locking.',
+      'Structuring reusable Terraform modules with remote state and locking to provision consistent dev, staging, and production environments.',
     category: 'Terraform',
     tags: ['Terraform', 'IaC', 'State Management'],
   },
   {
-    title: 'Building Resilient CI/CD Pipelines with Jenkins',
-    description: 'Best practices for creating reliable Jenkins pipelines with proper error handling, retry logic, and notification strategies.',
-    category: 'CI/CD',
-    tags: ['Jenkins', 'CI/CD', 'Automation'],
+    title: 'Zero-Downtime Rolling Deployments on ECS Fargate',
+    description:
+      'Configuring rolling deployments, health checks, and multi-stage Docker builds for reliable, zero-downtime releases on ECS Fargate.',
+    category: 'Containers',
+    tags: ['ECS Fargate', 'Docker', 'CI/CD'],
+  },
+  {
+    title: 'Right-Sizing Auto Scaling Policies for Traffic Spikes',
+    description:
+      'Designing ALB and CPU-based Auto Scaling policies that absorb 3x traffic spikes without manual intervention or overprovisioning cost.',
+    category: 'AWS',
+    tags: ['AWS', 'Auto Scaling', 'Cost Optimization'],
+  },
+  {
+    title: 'Azure VM Provisioning at Scale with ARM Templates & Azure CLI',
+    description:
+      'Automating VM provisioning and networking across client environments to cut onboarding time from days to hours.',
+    category: 'Azure',
+    tags: ['Azure', 'ARM Templates', 'Automation'],
+  },
+  {
+    title: 'CloudWatch, Prometheus, and Grafana: Dashboards That Get Used',
+    description:
+      'Practical patterns for alerting thresholds and dashboard design that reduce MTTD instead of adding noise.',
+    category: 'Monitoring',
+    tags: ['CloudWatch', 'Prometheus', 'Grafana'],
   },
 ];
 
 export function BlogSection() {
   return (
-    <section id="blog" className="py-20 px-6 bg-white">
+    <section id="blog" className="scroll-mt-20 py-16 px-6 bg-white">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-4xl mb-4 text-center">DevOps Learnings & Notes</h2>
         <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
@@ -57,13 +82,16 @@ export function BlogSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogPosts.map((post) => (
-            <Card key={post.title} className="rounded-2xl border-2 hover:shadow-lg transition-all group">
+            <Card
+              key={post.title}
+              className="rounded-2xl border-2 hover:shadow-lg hover:-translate-y-1 hover:border-rose-200 transition-all group"
+            >
               <CardHeader>
                 <div className="flex items-center gap-2 mb-3">
-                  <BookOpen className="h-5 w-5 text-blue-600" />
-                  <span className="text-sm text-blue-600 uppercase tracking-wide">{post.category}</span>
+                  <BookOpen className="h-5 w-5 text-rose-600" />
+                  <span className="text-sm text-rose-600 uppercase tracking-wide">{post.category}</span>
                 </div>
-                <CardTitle className="text-lg group-hover:text-blue-600 transition-colors">{post.title}</CardTitle>
+                <CardTitle className="text-lg group-hover:text-rose-600 transition-colors">{post.title}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-gray-600 text-sm leading-relaxed">{post.description}</p>
@@ -76,10 +104,26 @@ export function BlogSection() {
                   ))}
                 </div>
 
-                <Button variant="ghost" className="w-full rounded-xl group-hover:bg-blue-50">
-                  Read More
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
+                {post.href ? (
+                  <Button
+                    variant="outline"
+                    className="w-full rounded-xl border-rose-200 text-rose-600 hover:bg-rose-50 hover:border-rose-300 active:bg-rose-100"
+                    asChild
+                  >
+                    <a href={post.href} target="_blank" rel="noopener noreferrer">
+                      Read More
+                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </a>
+                  </Button>
+                ) : (
+                  <Button
+                    variant="outline"
+                    className="w-full rounded-xl border-rose-200 text-rose-600 hover:bg-rose-50 hover:border-rose-300 active:bg-rose-100"
+                  >
+                    Read More
+                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                )}
               </CardContent>
             </Card>
           ))}
